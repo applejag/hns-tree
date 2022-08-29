@@ -1,6 +1,6 @@
 # hns-tree
 
-I found that the kubectl-hnc command line was too slow when printing the
+I found that the kubectl-hns command line was too slow when printing the
 tree of namespaces, so I just created a small utility script to render them
 quickly.
 
@@ -38,7 +38,7 @@ test-root
 hns-tree  0.03s user 0.01s system 57% cpu 0.066 total
 ```
 
-Versus the time it takes for kubectl-hnc:
+Versus the time it takes for kubectl-hns:
 
 ```console
 $ time kubectl-hns tree --all-namespaces
