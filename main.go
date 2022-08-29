@@ -115,11 +115,11 @@ func createTree(namespaces []v1.Namespace) []Node {
 		}
 	}
 	for _, node := range nodesMap {
-		slices.SortDescFunc(node.Children, func(a, b *Node) bool {
+		slices.SortFunc(node.Children, func(a, b *Node) bool {
 			return a.Name < b.Name
 		})
 	}
-	slices.SortDescFunc(rootNodes, func(a, b Node) bool {
+	slices.SortFunc(rootNodes, func(a, b Node) bool {
 		return a.Name < b.Name
 	})
 	return rootNodes
