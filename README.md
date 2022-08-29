@@ -30,11 +30,11 @@ kube-node-lease
 kube-public
 kube-system
 test-root
-└── test-child2
-│   ├── test-child5
 └── test-child1
-    └── test-child3
-    └── test-child4
+│   ├── test-child3
+│   ├── test-child4
+└── test-child2
+    └── test-child5
 hns-tree  0.03s user 0.01s system 57% cpu 0.066 total
 ```
 
