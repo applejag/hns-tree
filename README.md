@@ -6,6 +6,8 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # hns-tree
 
+[![REUSE status](https://api.reuse.software/badge/github.com/jilleJr/hns-tree)](https://api.reuse.software/info/github.com/jilleJr/hns-tree)
+
 I found that the kubectl-hns command line was too slow when printing the
 tree of namespaces, so I just created a small utility script to render them
 quickly.
@@ -63,3 +65,10 @@ test-root
 [s] indicates subnamespaces
 kubectl-hns tree --all-namespaces  0.04s user 0.04s system 1% cpu 5.828 total
 ```
+
+## License
+
+This project is primarily licensed under the GNU General Public License v3.0 or
+later (GPL-3.0-or-later).
+
+Copyright © Kalle Fagerberg
