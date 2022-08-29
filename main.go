@@ -1,3 +1,4 @@
+// Package main is the entrypoint for this module.
 package main
 
 import (
@@ -77,16 +78,25 @@ func mainErr() error {
 	}
 }
 
+// Node is a namespace tree node with a list of its children.
 type Node struct {
-	Name        string            `json:"name" yaml:"name"`
-	Annotations map[string]string `json:"-" yaml:"-"`
-	Children    []*Node           `json:"children,omitempty" yaml:"children,omitempty"`
+	Name     string  `json:"name" yaml:"name"`
+	Children []*Node `json:"children,omitempty" yaml:"children,omitempty"`
 }
 
 func createTree(namespaces []v1.Namespace) []Node {
-	nodesMap := make(map[string]*Node)
+	type NodeWithAnnotations struct {
+		*Node
+		Annotations map[string]string
+	}
+	nodesMap := make(map[string]NodeWithAnnotations)
 	for _, ns := range namespaces {
-		nodesMap[ns.Name] = &Node{Name: ns.Name, Annotations: ns.Annotations}
+		nodesMap[ns.Name] = NodeWithAnnotations{
+			Node: &Node{
+				Name: ns.Name,
+			},
+			Annotations: ns.Annotations,
+		}
 	}
 	var childrenNames []string
 	for _, node := range nodesMap {
@@ -95,13 +105,13 @@ func createTree(namespaces []v1.Namespace) []Node {
 			continue
 		}
 		parentNode := nodesMap[parentName]
-		parentNode.Children = append(parentNode.Children, node)
+		parentNode.Children = append(parentNode.Children, node.Node)
 		childrenNames = append(childrenNames, node.Name)
 	}
 	var rootNodes []Node
 	for _, node := range nodesMap {
 		if !slices.Contains(childrenNames, node.Name) {
-			rootNodes = append(rootNodes, *node)
+			rootNodes = append(rootNodes, *node.Node)
 		}
 	}
 	for _, node := range nodesMap {

@@ -8,20 +8,25 @@ import (
 	"gopkg.in/typ.v4"
 )
 
+// Output is a flag type for specifying the output format. E.g json vs yaml.
 type Output string
 
+// Possible output format values
 const (
 	OutputTree Output = "tree"
 	OutputJSON Output = "json"
 	OutputYAML Output = "yaml"
 )
 
+// ensures the type implements the interface
 var _ pflag.Value = typ.Ref(Output(""))
 
+// String returns the string representations for this flag.
 func (o Output) String() string {
 	return string(o)
 }
 
+// Set updates the existing flag's value, if parsing is successful.
 func (o *Output) Set(new string) error {
 	newOutput, err := ParseOutput(new)
 	if err != nil {
@@ -31,6 +36,7 @@ func (o *Output) Set(new string) error {
 	return nil
 }
 
+// ParseOutput will attempt to parse a given string as a valid output enum value.
 func ParseOutput(s string) (Output, error) {
 	switch strings.TrimSpace(strings.ToLower(s)) {
 	case string(OutputTree):
@@ -44,6 +50,7 @@ func ParseOutput(s string) (Output, error) {
 	}
 }
 
-func (o Output) Type() string {
+// Type returns this flag type's name.
+func (Output) Type() string {
 	return "output"
 }
