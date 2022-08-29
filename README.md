@@ -24,16 +24,36 @@ Usage of hns-tree:
 
 ```console
 $ time hns-tree
+default
+hnc-system
+kube-node-lease
+kube-public
+kube-system
 test-root
 └── test-child2
 │   ├── test-child5
 └── test-child1
-    └── test-child4
     └── test-child3
-kube-system
-kube-public
-kube-node-lease
-hnc-system
-default
+    └── test-child4
 hns-tree  0.03s user 0.01s system 57% cpu 0.066 total
+```
+
+Versus the time it takes for kubectl-hnc:
+
+```console
+$ time kubectl-hns tree --all-namespaces
+default
+hnc-system
+kube-node-lease
+kube-public
+kube-system
+test-root
+├── [s] test-child1
+│   ├── [s] test-child3
+│   └── [s] test-child4
+└── [s] test-child2
+    └── [s] test-child5
+
+[s] indicates subnamespaces
+kubectl-hns tree --all-namespaces  0.04s user 0.04s system 1% cpu 5.828 total
 ```
