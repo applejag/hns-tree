@@ -21,3 +21,6 @@
 # Go workspace file
 go.work
 
+# NPM/NodeJS
+package-lock.json
+node_modules/
