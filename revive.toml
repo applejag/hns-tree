@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Kalle Fagerberg
+# 
+# SPDX-License-Identifier: CC0-1.0
+
 # Taken from https://revive.run/docs#recommended-configuration
 ignoreGeneratedHeader = false
 severity = "warning"

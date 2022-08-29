@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2022 Kalle Fagerberg
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # hns-tree
 
 I found that the kubectl-hns command line was too slow when printing the

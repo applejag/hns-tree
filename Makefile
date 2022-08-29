@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2022 Kalle Fagerberg
+# 
+# SPDX-License-Identifier: CC0-1.0
+
 .PHONY: build
 build: hns-tree
 
@@ -25,11 +29,17 @@ check:
 	go test ./...
 
 .PHONY: deps
-deps: deps-go deps-npm
+deps: deps-go deps-pip deps-npm
 
 .PHONY: deps-go
 deps-go:
+	go install github.com/mgechev/revive@latest
+	go install golang.org/x/tools/cmd/goimports@latest
 	go get
+
+.PHONY: deps-pip
+deps-pip:
+	python3 -m pip install --upgrade --user reuse
 
 .PHONY: deps-npm
 deps-npm: node_modules
@@ -38,7 +48,7 @@ node_modules:
 	npm install
 
 .PHONY: lint
-lint: lint-md lint-go
+lint: lint-md lint-go lint-license
 
 .PHONY: lint-fix
 lint-fix: lint-md-fix lint-go-fix
@@ -61,3 +71,7 @@ lint-go:
 lint-go-fix:
 	@echo goimports -d -w '**/*.go'
 	@goimports -d -w $(shell git ls-files "*.go")
+
+.PHONY: lint-license
+lint-license:
+	reuse lint
