@@ -4,6 +4,10 @@ build: hns-tree
 hns-tree: *.go internal/*/*.go
 	go build
 
+.PHONY: install
+install:
+	go install .
+
 .PHONY: run
 run:
 	go run .
